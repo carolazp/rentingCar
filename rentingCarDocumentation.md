@@ -15,7 +15,7 @@ public class Car {
     private int year;
     private double price;
 
-    // constructor, geters, setters, methods and toString
+    // constructor, getters, setters, methods and toString
 }
 
 ```
@@ -42,6 +42,41 @@ public class Client {
 
 todo
 
+## UML
+
+```mermaid
+classDiagram
+
+    class Car{
+      - String id
+      - String brand
+      - String model
+      - String plate
+      - int year
+      - double price
+    }
+
+    class Client{
+      - String id
+      - String name
+      - String lastName
+      - String address
+      - String email
+      - bool premium
+    }
+
+    class Booking{
+      -bool isActive
+      -Date init
+      -Date ending
+      -Car car
+      -Client client
+      -int price
+    }
+
+    Car --* Booking
+    Client --* Booking
+```
 
 ## Goal
 > Rent a car by CLI with client, car, init and ending date, price
