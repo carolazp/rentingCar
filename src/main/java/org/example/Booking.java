@@ -7,15 +7,15 @@ public class Booking {
     private int days;
     private double price;
     private Car car;
-    private Client client;
+    /*private Client client;*/
 
-    public Booking(String id, boolean isActive, int days, double price, Car car, Client client){
+    public Booking(String id, boolean isActive, int days, double price, Car car /*, Client client*/){
         this.id = id;
         this.isActive = isActive;
         this.days = days;
         this.price = price;
         this.car = car;
-        this.client = client;
+        /*this.client = client;*/
     }
 
     public Booking(){}
@@ -61,21 +61,22 @@ public class Booking {
         this.car = car;
     }
 
-    public Client getClient() {
+    /*public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
-    }
+    }*/
 
+    @Override
     public String toString(){
         return "Booking {" +
                 "id='" + id + '\'' +
-                ", car=" + car +
+                ", isActive=" + isActive +
                 ", days=" + days +
                 ", price=" + price +
-                ", isActive=" + isActive +
+                ", car=" + car +
                 '}';
     }
 }
