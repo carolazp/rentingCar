@@ -66,12 +66,13 @@ classDiagram
     }
 
     class Booking{
+      -String id
       -bool isActive
       -Date init
       -Date ending
+      -int price
       -Car car
       -Client client
-      -int price
     }
 
     Car --* Booking
