@@ -19,6 +19,13 @@ public class Car {
         this.price = price;
     }
 
+    // other constructions of Car:
+    public Car() {}
+
+    public Car(String id){
+        this.id = id;
+    }
+
     // los metodos propios de la clase Car
     // 1º getters y setters
 
@@ -70,11 +77,9 @@ public class Car {
         this.price = price;
     }
 
-    // 2º otros metodos
-    public Car() {}
-
-    public Car(String id){
-        this.id = id;
+    // 2º other methods
+    public int carAge(){
+        return 2025 - year;
     }
 
     @Override
