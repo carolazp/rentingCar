@@ -35,7 +35,7 @@ public class Car {
         this.id = id;
     }
 
-    // los metodos propios de la clase Car
+    // methods belonging to the Car class
     // 1º getters y setters
 
     public String getId() {
