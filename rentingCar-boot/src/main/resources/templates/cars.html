@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+
+    <div class="w3-container w3-sand">
+        <h1>Spring Boot Car Rental System</h1>
+        <h5>Table of cars from @Controller @Service @Repository and H2 DB</h5>
+    </div>
+    <br>
+
+    <p>Car Rental Management</p>
+    <p th:text="${rentalCompany}">Car Rental Company</p>
+    <p>Available Cars</p>
+    <p th:text="${totalCars}">Total Cars</p>
+    <p>Fleet Status</p>
+    <p th:text="${fleetStatus}">Fleet Status</p>
+
+    <div>
+        <p><a th:href="@{/cars/generate(qtyCars=10)}" class="w3-button w3-cyan">Generate Sample Cars -10-</a></p>
+    </div>
+
+    <div>
+        <p><a th:href="@{/cars/generate}" class="w3-button w3-blue">Generate Sample Cars -50-</a></p>
+    </div>
+
+    <table class="w3-table-all w3-hoverable">
+        <tr>
+            <td>Car ID</td>
+            <td>Brand</td>
+            <td>Model</td>
+            <td>Plate</td>
+            <td>Year</td>
+            <td>Price/Day</td>
+            <td>Age</td>
+            <td>Delete</td>
+            <td>Update</td>
+            <td>Detail</td>
+        </tr>
+        <tr th:each="car:${cars}">
+            <td th:text="${car.id}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.plate}"></td>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.price} + '€'"></td>
+            <td th:text="${car.carAge()} + ' years'"></td>
+
+            <td><a th:href="@{deleteCar(carIdFromView=${car.id})}"
+                   class="w3-button w3-red">Delete this car</a></td>
+
+            <td><a th:href="@{updateCar(carIdFromView=${car.id})}"
+                   class="w3-button w3-cyan">Update this car</a></td>
+
+            <td><a th:href="@{detailCar(carIdFromView=${car.id})}"
+                   class="w3-button w3-black">Detail car</a></td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/cars/newCar}" class="w3-button w3-blue">Add new car</a>
+    </p>
+
+</div>
+
+</body>
+</html>
