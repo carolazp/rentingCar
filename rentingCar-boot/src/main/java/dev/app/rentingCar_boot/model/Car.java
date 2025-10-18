@@ -3,6 +3,9 @@ package dev.app.rentingCar_boot.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 
 @Entity
@@ -27,6 +30,18 @@ public class Car {
         this.year = year;
         this.price = price;
     }
+
+
+    // Connection with CarExtra.java model and this model
+    // one-to-many relationship: one car have many carExtras
+    @OneToMany
+    private List<CarExtras> carExtras;
+
+
+
+
+
+
 
     // other constructions of Car:
     public Car() {}

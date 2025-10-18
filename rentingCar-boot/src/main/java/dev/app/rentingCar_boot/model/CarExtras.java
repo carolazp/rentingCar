@@ -27,6 +27,11 @@ public class CarExtras {
     }
 
 
+    // Connection with car.java model and this model
+    // many-to-one relationship: many carExtras to one car
+    @ManyToOne
+    private Car car;
+
 
 
 
