@@ -17,7 +17,7 @@ public class CarController{
     public String listCar(Model model){
         model.addAttribute("cars", carRepository.findAll());
 
-        System.out.println("Cars: " + carRepository.findAll());
+        System.out.println("Cars (Controller /cars): " + carRepository.findAll());
 
         return "cars"; // This is cars.html ( src.main.resources.templates. "CARS.HTML" )
 
@@ -26,7 +26,7 @@ public class CarController{
     @GetMapping("/cars-nocss")
     public String listCarNocss(Model model){
         model.addAttribute("car", carRepository.findAll());
-        System.out.println("Cars: " + carRepository.findAll());
+        System.out.println("Cars (Controller /cars-nocss): " + carRepository.findAll());
         return "cars-nocss";
     }
 

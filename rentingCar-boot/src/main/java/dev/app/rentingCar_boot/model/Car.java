@@ -51,7 +51,7 @@ public class Car {
     }
 
     // methods belonging to the Car class
-    // 1º getters y setters
+    // 1º getters and setters
 
     public String getId() {
         return id;

@@ -20,6 +20,8 @@ public class CarRestController {
     @GetMapping("/cars")
     public List<Car> getAllCars(){
 
+        System.out.println("Cars (Rest Controller /api/cars): " + carRepository.findAll());
+
         return (List<Car>) carRepository.findAll();
 
     }
