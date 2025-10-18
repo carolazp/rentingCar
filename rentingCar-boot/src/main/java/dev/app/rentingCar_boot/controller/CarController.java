@@ -23,5 +23,12 @@ public class CarController{
 
     }
 
+    @GetMapping("/cars-nocss")
+    public String listCarNocss(Model model){
+        model.addAttribute("car", carRepository.findAll());
+        System.out.println("Cars: " + carRepository.findAll());
+        return "cars-nocss";
+    }
+
 
 }

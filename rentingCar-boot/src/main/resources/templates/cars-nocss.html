@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+
+<div>
+
+    <div>
+        <h1>Spring Boot Car Rental System</h1>
+        <h5>Table of cars from @Controller @Service @Repository and H2 DB</h5>
+    </div>
+    <br>
+
+    <p>Car Rental Management</p>
+    <p th:text="${rentalCompany}">Car Rental Company</p>
+    <p>Available Cars</p>
+    <p th:text="${totalCars}">Total Cars</p>
+    <p>Fleet Status</p>
+    <p th:text="${fleetStatus}">Fleet Status</p>
+
+    <div>
+        <p><a th:href="@{/cars/generate(qtyCars=10)}">Generate Sample Cars -10-</a></p>
+    </div>
+
+    <div>
+        <p><a th:href="@{/cars/generate}">Generate Sample Cars -50-</a></p>
+    </div>
+
+    <table>
+        <tr>
+            <td>Car ID</td>
+            <td>Brand</td>
+            <td>Model</td>
+            <td>Plate</td>
+            <td>Year</td>
+            <td>Price/Day</td>
+            <td>Age</td>
+            <td>Delete</td>
+            <td>Update</td>
+            <td>Detail</td>
+        </tr>
+        <tr th:each="car:${cars}">
+            <td th:text="${car.id}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.model}"></td>
+            <td th:text="${car.plate}"></td>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.price} + '€'"></td>
+            <td th:text="${car.carAge()} + ' years'"></td>
+
+            <td><a th:href="@{deleteCar(carIdFromView=${car.id})}">Delete this car</a></td>
+
+            <td><a th:href="@{updateCar(carIdFromView=${car.id})}">Update this car</a></td>
+
+            <td><a th:href="@{detailCar(carIdFromView=${car.id})}">Detail car</a></td>
+        </tr>
+    </table>
+
+    <p>
+        <a th:href="@{/cars/newCar}">Add new car</a>
+    </p>
+
+</div>
+
+</body>
+</html>
