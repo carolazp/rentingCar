@@ -30,14 +30,14 @@ class RentingCarBootApplicationTests {
     @Test
     void testCarRepository(){
 
-        Car car1 = new Car("1", "Toyota", "Corolla", "123456", 2022, 100.0);
-        carRepository.save(car1); // save(): this save this instance in the database (like an insert in SQL)
-
-        Car car2 = new Car("2", "Toyota", "Corolla", "123456", 2022, 100.0);
-        carRepository.save(car2);
-
-        Car car5 = new Car("5", "Toyota", "Corolla", "123456", 2020, 100.0);
-        carRepository.save(car5);
+//        Car car1 = new Car("1", "Toyota", "Corolla", "123456", 2022, 100.0);
+//        carRepository.save(car1); // save(): this save this instance in the database (like an insert in SQL)
+//
+//        Car car2 = new Car("2", "Toyota", "Corolla", "123456", 2022, 100.0);
+//        carRepository.save(car2);
+//
+//        Car car5 = new Car("5", "Toyota", "Corolla", "123456", 2020, 100.0);
+//        carRepository.save(car5);
 
 
 

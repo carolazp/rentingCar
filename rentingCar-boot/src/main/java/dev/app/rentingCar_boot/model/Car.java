@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 import java.util.List;
+import java.util.Random;
 
 
 @Entity
@@ -22,8 +23,18 @@ public class Car {
     private int year;
     private double price;
 
-    public Car(String id, String brand, String model, String plate, int year, double price){
-        this.id = id;
+
+    // Generate 4-digits UUID for the car
+    // @return a 4-digit string ID
+    private String generateFourDigitUuid(){
+        Random random = new Random();
+        int uuid = 1000 + random.nextInt(9000); // generate number between 1000-9999
+
+        return String.valueOf(uuid);
+    }
+
+    public Car(String brand, String model, String plate, int year, double price){
+        this.id = generateFourDigitUuid();
         this.brand = brand;
         this.model = model;
         this.plate = plate;
@@ -44,7 +55,9 @@ public class Car {
 
 
     // other constructions of Car:
-    public Car() {}
+    public Car() {
+        this.id = generateFourDigitUuid();
+    }
 
     public Car(String id){
         this.id = id;
