@@ -1,6 +1,8 @@
 package dev.app.rentingCar_boot;
 
 import dev.app.rentingCar_boot.model.Car;
+import dev.app.rentingCar_boot.model.CarExtras;
+import dev.app.rentingCar_boot.repository.CarExtrasRepository;
 import dev.app.rentingCar_boot.repository.CarRepository;
 
 import dev.app.rentingCar_boot.service.CarService;
@@ -17,6 +19,9 @@ class RentingCarBootApplicationTests {
     // dependency injection
     @Autowired
     CarRepository carRepository;
+
+    @Autowired
+    CarExtrasRepository carExtrasRepository;
 
     @Autowired
     CarService carService;
@@ -39,8 +44,6 @@ class RentingCarBootApplicationTests {
 //        Car car5 = new Car("5", "Toyota", "Corolla", "123456", 2020, 100.0);
 //        carRepository.save(car5);
 
-
-
     }
 
     @Test
@@ -56,5 +59,29 @@ class RentingCarBootApplicationTests {
 
         carService.deleteCarById(id);
     }
+
+
+    @Test
+    void testAssignCarToCarExtras(){
+
+        CarExtras myCarExtras = new CarExtras("1", "GPS", "High precission GPS", 50.0, true, "Electronic");
+        carExtrasRepository.save(myCarExtras);
+        System.out.println("CarExtras -object-: " + carExtrasRepository.findById("1").get());
+
+        System.out.println("CarExtras --from db-: " + myCarExtras);
+        Optional<Car> myCar = carService.findCarById("6157");
+        System.out.println("Car: " + myCar.get());
+
+        myCarExtras.setCarFK(myCar.get());
+        carExtrasRepository.save(myCarExtras);
+
+
+
+    }
+
+
+
+
+
 
 }

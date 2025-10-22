@@ -1,8 +1,6 @@
 package dev.app.rentingCar_boot.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -17,6 +15,16 @@ public class CarExtras {
     private boolean available;
     private String category;
 
+
+
+    // Connection with car.java model and this model
+    // many-to-one relationship: many carExtras to one car
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CAR_FK")
+    private Car carFK;
+
+
+
     public CarExtras(String id, String name, String description, double dailyPrice, boolean available, String category){
         this.id = id;
         this.name = name;
@@ -25,13 +33,6 @@ public class CarExtras {
         this.available = available;
         this.category = category;
     }
-
-
-    // Connection with car.java model and this model
-    // many-to-one relationship: many carExtras to one car
-    @ManyToOne
-    private Car car;
-
 
 
 
@@ -88,6 +89,17 @@ public class CarExtras {
     public void setCategory(String category) {
         this.category = category;
     }
+
+
+    // getters and setters of new attriute carFK  (carKF:Car)
+    public Car getCarFK() {
+        return carFK;
+    }
+
+    public void setCarFK(Car carFK) {
+        this.carFK = carFK;
+    }
+
 
     // other methods:
     @Override

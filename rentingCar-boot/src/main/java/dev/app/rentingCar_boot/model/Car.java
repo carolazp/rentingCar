@@ -1,10 +1,8 @@
 package dev.app.rentingCar_boot.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,6 +20,14 @@ public class Car {
     @Column(name="car_year")
     private int year;
     private double price;
+
+
+
+    // Connection with CarExtra.java model and this model
+    // one-to-many relationship: one car have many carExtras
+    @OneToMany(mappedBy = "carFK", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<CarExtras> carExtras = new ArrayList<>(); // new attribute for Car model: carExtras
+
 
 
     // Generate 4-digits UUID for the car
@@ -43,16 +49,6 @@ public class Car {
     }
 
 
-    // Connection with CarExtra.java model and this model
-    // one-to-many relationship: one car have many carExtras
-    @OneToMany
-    private List<CarExtras> carExtras;
-
-
-
-
-
-
 
     // other constructions of Car:
     public Car() {
@@ -61,6 +57,7 @@ public class Car {
 
     public Car(String id){
         this.id = id;
+        this.carExtras = new ArrayList<>();
     }
 
     // methods belonging to the Car class
@@ -113,6 +110,17 @@ public class Car {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+   // getters and setters of new attribute carExtras  (carExtras:List<CarExtras>)
+    public List<CarExtras> getCarExtras() {
+        return carExtras;
+    }
+
+    public void setCarExtras(List<CarExtras> carExtras) {
+        this.carExtras = carExtras;
+    }
+
 
     // 2º other methods
     public int carAge(){
