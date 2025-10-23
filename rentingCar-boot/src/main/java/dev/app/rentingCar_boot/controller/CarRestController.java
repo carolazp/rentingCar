@@ -2,6 +2,8 @@ package dev.app.rentingCar_boot.controller;
 
 
 import dev.app.rentingCar_boot.model.Car;
+import dev.app.rentingCar_boot.model.CarExtras;
+import dev.app.rentingCar_boot.repository.CarExtrasRepository;
 import dev.app.rentingCar_boot.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,18 @@ public class CarRestController {
         System.out.println("Cars (Rest Controller /api/cars): " + carRepository.findAll());
 
         return (List<Car>) carRepository.findAll();
+
+    }
+
+    @Autowired
+    private CarExtrasRepository carExtrasRepository;
+
+    @GetMapping("/carExtras")
+    public List<CarExtras> getAllcarExtras(){
+
+        System.out.println("Cars (Rest Controller /api/carExtras): " + carExtrasRepository.findAll());
+
+        return (List<CarExtras>) carExtrasRepository.findAll();
 
     }
 

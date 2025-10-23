@@ -1,5 +1,6 @@
 package dev.app.rentingCar_boot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -19,6 +20,7 @@ public class CarExtras {
 
     // Connection with car.java model and this model
     // many-to-one relationship: many carExtras to one car
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CAR_FK")
     private Car carFK;
@@ -91,7 +93,7 @@ public class CarExtras {
     }
 
 
-    // getters and setters of new attriute carFK  (carKF:Car)
+    // getter and setter of new attriute carFK  (carKF:Car)
     public Car getCarFK() {
         return carFK;
     }

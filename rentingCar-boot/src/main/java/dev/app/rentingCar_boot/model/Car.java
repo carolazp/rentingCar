@@ -112,7 +112,7 @@ public class Car {
     }
 
 
-   // getters and setters of new attribute carExtras  (carExtras:List<CarExtras>)
+   // getter and setter of new attribute carExtras  (carExtras:List<CarExtras>)
     public List<CarExtras> getCarExtras() {
         return carExtras;
     }

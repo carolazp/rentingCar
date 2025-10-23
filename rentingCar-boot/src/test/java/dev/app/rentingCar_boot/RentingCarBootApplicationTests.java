@@ -69,17 +69,14 @@ class RentingCarBootApplicationTests {
         System.out.println("CarExtras -object-: " + carExtrasRepository.findById("1").get());
 
         System.out.println("CarExtras --from db-: " + myCarExtras);
-        Optional<Car> myCar = carService.findCarById("6157");
+        Optional<Car> myCar = carService.findCarById("6828"); // 6828: is the ID of the car generated previously in CarController
         System.out.println("Car: " + myCar.get());
 
         myCarExtras.setCarFK(myCar.get());
-        carExtrasRepository.save(myCarExtras);
-
-
-
+        carExtrasRepository.save(myCarExtras); // in my attribute carFK of myCarExtras object has the car 6828 attached
+        // Infinity loop when I execute the CarRestController in .html:  INFINITIVE RECURSION/circular Reference because it's a BIDIRECTIONAL relationship
+        // |-> to solve this: add @JsonIgnore annotation where is @JoinCOlumn annotation
     }
-
-
 
 
 
