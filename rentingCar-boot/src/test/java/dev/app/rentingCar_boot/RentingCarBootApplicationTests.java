@@ -2,9 +2,11 @@ package dev.app.rentingCar_boot;
 
 import dev.app.rentingCar_boot.model.Car;
 import dev.app.rentingCar_boot.model.CarExtras;
+import dev.app.rentingCar_boot.model.InssuranceCia;
 import dev.app.rentingCar_boot.repository.CarExtrasRepository;
 import dev.app.rentingCar_boot.repository.CarRepository;
 
+import dev.app.rentingCar_boot.repository.InssuranceCiaRepository;
 import dev.app.rentingCar_boot.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +27,9 @@ class RentingCarBootApplicationTests {
 
     @Autowired
     CarService carService;
+
+    @Autowired
+    InssuranceCiaRepository inssuranceCiaRepository;
 
 
     // tests
@@ -77,6 +82,41 @@ class RentingCarBootApplicationTests {
         // Infinity loop when I execute the CarRestController in .html:  INFINITIVE RECURSION/circular Reference because it's a BIDIRECTIONAL relationship
         // |-> to solve this: add @JsonIgnore annotation where is @JoinCOlumn annotation
     }
+
+
+    @Test
+    void testAssignCarExtraToCarAndCarToInssurance(){
+
+        // create a car extras: myCarExtras
+        CarExtras myCarExtras = new CarExtras("2", "GPS", "High precission GPS", 50.0, true, "Electronic");
+        carExtrasRepository.save(myCarExtras);
+        System.out.println("CarExtras -object-: " + carExtrasRepository.findById("2").get());
+        System.out.println("CarExtras --from db-: " + myCarExtras);
+
+        // create an insurance cia: myInssuranceCia
+        InssuranceCia myInssuranceCia = new InssuranceCia();
+        myInssuranceCia.setId("1");
+        myInssuranceCia.setName("alliance");
+        //myInssuranceCia.setDescription("");
+        myInssuranceCia.setQtyEmployee(1000);
+        myInssuranceCia.setActive(true);
+        inssuranceCiaRepository.save(myInssuranceCia);
+        System.out.println("InssuranceCia -object-: " + inssuranceCiaRepository.findById("1").get());
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
 
 
 
