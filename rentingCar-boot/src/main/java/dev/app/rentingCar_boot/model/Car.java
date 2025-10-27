@@ -1,5 +1,6 @@
 package dev.app.rentingCar_boot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -27,6 +28,15 @@ public class Car {
     // one-to-many relationship: one car have many carExtras
     @OneToMany(mappedBy = "carFK", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<CarExtras> carExtras = new ArrayList<>(); // new attribute for Car model: carExtras
+
+
+
+    // Connection with InssuranceCia.java model and this model Car.java
+    // many-to-one relationship: many cars have one inssurancecia
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "inssurance_cia_id")
+    private InssuranceCia inssuranceCia;
 
 
 
@@ -119,6 +129,16 @@ public class Car {
 
     public void setCarExtras(List<CarExtras> carExtras) {
         this.carExtras = carExtras;
+    }
+
+
+    // getter and setter of new attribute inssuranceCia
+    public InssuranceCia getInssuranceCia() {
+        return inssuranceCia;
+    }
+
+    public void setInssuranceCia(InssuranceCia inssuranceCia) {
+        this.inssuranceCia = inssuranceCia;
     }
 
 

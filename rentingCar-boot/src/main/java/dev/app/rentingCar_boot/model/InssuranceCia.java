@@ -1,8 +1,12 @@
 package dev.app.rentingCar_boot.model;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
 
 @Entity
 public class InssuranceCia {
@@ -14,6 +18,23 @@ public class InssuranceCia {
     private String description;
     private int qtyEmployee;
     private boolean isActive;
+
+
+
+    // Connection with Car.java model and this model InssuranceCia.java
+    // one-to-many relationship: one inssurancecia have many cars
+    @OneToMany(mappedBy = "inssuranceCia", cascade = CascadeType.ALL)
+    private List<Car> cars; // new attribute for InssuranceCia model: cars
+
+    // |-> its getter and setter of this new attribute cars:
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(List<Car> cars) {
+        this.cars = cars;
+    }
+
 
 
     // construction of Car:

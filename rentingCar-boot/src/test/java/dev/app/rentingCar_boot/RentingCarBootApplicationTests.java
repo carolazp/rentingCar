@@ -103,21 +103,21 @@ class RentingCarBootApplicationTests {
         inssuranceCiaRepository.save(myInssuranceCia);
         System.out.println("InssuranceCia -object-: " + inssuranceCiaRepository.findById("1").get());
 
+        // fetch a car: id="6828"
+        Optional<Car> myOpCar = carService.findCarById("6828");
+        System.out.println("Car 6828: " + myOpCar.get());
 
+        // carExtras(many)---car(one): assign to the many side: carExtras to car
+        myCarExtras.setCarFK(myOpCar.get());
+        carExtrasRepository.save(myCarExtras);
 
-
-
+        //insssuranceCia(one) --- car(many): assign to the many side: car to inssurancecia
+        myOpCar.get().setInssuranceCia(myInssuranceCia);
+        carRepository.save(myOpCar.get());
 
 
 
     }
-
-
-
-
-
-
-
 
 
 
