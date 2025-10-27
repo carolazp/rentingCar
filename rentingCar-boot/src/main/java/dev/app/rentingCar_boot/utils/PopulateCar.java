@@ -1,54 +1,23 @@
-package dev.app.rentingCar_boot.controller;
+package dev.app.rentingCar_boot.utils;
 
 import dev.app.rentingCar_boot.model.Car;
 import dev.app.rentingCar_boot.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Controller
-public class CarController{
+@Component
+public class PopulateCar {
 
-    @Autowired // injects an instance of CarRepository into the controller
-    CarRepository carRepository;
+    @Autowired
+    private CarRepository carRepository;
 
-    @GetMapping("/cars")
-    public String listCar(Model model){
-        model.addAttribute("cars", carRepository.findAll());
 
-        // System.out.println("Cars (Controller /cars): " + carRepository.findAll());
-
-        return "cars"; // This is cars.html ( src.main.resources.templates. "CARS.HTML" )
-
-    }
-
-    @GetMapping("/cars-nocss")
-    public String listCarNoCss(Model model){
-        model.addAttribute("car", carRepository.findAll());
-        // System.out.println("Cars (Controller /cars-nocss): " + carRepository.findAll());
-        return "cars-nocss";
-    }
-
-    @GetMapping("/cars-nocss-data")
-    public String listCarNoCssData(Model model){
-        model.addAttribute("cars", carRepository.findAll());
-
-        // System.out.println("Cars (Controller /cars-nocss-data): " + carRepository.findAll());
-
-        return "cars-nocss-data"; // This is cars.html ( src.main.resources.templates. "CARS.HTML" )
-
-    }
-
-    /* ------------------- MOVE THESE METHODS TO UTILS/PopulateCar.JAVA -------------------
     // generate ramdom plate for Cars
-    private String generateRandomPlate(Random random){
+    public String generateRandomPlate(Random random){
         StringBuilder plate = new StringBuilder();
 
         // generate 3 letters: one letter in each loop
@@ -65,8 +34,7 @@ public class CarController{
     }
 
     // populate Cars (Car model) with fake/random data
-    @GetMapping("/cars/generate")
-    public String generateCars(@RequestParam int qtyCars){
+    public List<Car> generateCars(int qtyCars){
 
         List<Car> generatedCars = new ArrayList<>();
         Random random = new Random();
@@ -87,11 +55,8 @@ public class CarController{
         }
 
         // return "Successfully generated " + qtyCars + " cars. Total cars in database: " + carRepository.count();
-        return "cars"; // This is cars.html ( src.main.resources.templates. "CARS.HTML" )
-
+        return generatedCars;
     }
-
-    */
 
 
 
