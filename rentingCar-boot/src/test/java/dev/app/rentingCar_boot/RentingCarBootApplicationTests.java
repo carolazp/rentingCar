@@ -8,6 +8,7 @@ import dev.app.rentingCar_boot.repository.CarRepository;
 
 import dev.app.rentingCar_boot.repository.InssuranceCiaRepository;
 import dev.app.rentingCar_boot.service.CarService;
+import dev.app.rentingCar_boot.utils.PopulateCar;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,8 @@ class RentingCarBootApplicationTests {
     @Autowired
     InssuranceCiaRepository inssuranceCiaRepository;
 
+    @Autowired
+    PopulateCar populateCar;
 
     // tests
 	@Test
@@ -117,6 +120,11 @@ class RentingCarBootApplicationTests {
 
 
 
+    }
+
+    @Test
+    void testPopulateCar(){
+        populateCar.populateCar(10);
     }
 
 

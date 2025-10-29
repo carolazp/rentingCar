@@ -21,6 +21,29 @@ public class PopulateCar {
     private CarExtrasRepository carExtrasRepository;
 
 
+    // populate Cars
+    public void populateCar(int qty){
+        List<Car> cars = generateCars(qty);
+        List<CarExtras> carExtrass = generateCarExtras(qty);
+
+        assignCarToCarExtras(cars, carExtrass);
+
+    }
+
+
+    // pair Car---CarExtras relationship
+    public void assignCarToCarExtras(List<Car> cars, List<CarExtras> carExtrass){
+        Random random = new Random();
+
+        for (CarExtras carExtras:carExtrass){
+            Car car = cars.get(random.nextInt(cars.size()));
+            carExtras.setCarFK(car);
+            carExtrasRepository.save(carExtras);
+        }
+
+    }
+
+
     //----------------------------GENERATE CARS----------------------------
     // generate ramdom plate for Cars
     public String generateRandomPlate(Random random){
