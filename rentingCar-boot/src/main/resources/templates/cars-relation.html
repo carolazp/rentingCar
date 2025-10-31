@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<body>
+
+<div>
+
+    <div>
+        <h1>Spring Boot Car Rental System - Cars with Relations</h1>
+        <h5>Table of cars with Insurance Companies and Car Extras from @Controller @Service @Repository and H2 DB</h5>
+    </div>
+    <br>
+
+
+
+
+    <div th:each="car:${cars}" style="border: 2px solid #333; margin: 20px 0; padding: 15px; background-color: #f9f9f9;">
+
+        <!-- Car Information -->
+        <div style="background-color: #e6f3ff; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+            <h3 style="margin: 0 0 10px 0; color: #0066cc;">🚗 Car Details</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 5px; font-weight: bold;">Car ID:</td>
+                    <td style="padding: 5px;" th:text="${car.id}"></td>
+                    <td style="padding: 5px; font-weight: bold;">Brand:</td>
+                    <td style="padding: 5px;" th:text="${car.brand}"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px; font-weight: bold;">Model:</td>
+                    <td style="padding: 5px;" th:text="${car.model}"></td>
+                    <td style="padding: 5px; font-weight: bold;">Plate:</td>
+                    <td style="padding: 5px;" th:text="${car.plate}"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px; font-weight: bold;">Year:</td>
+                    <td style="padding: 5px;" th:text="${car.year}"></td>
+                    <td style="padding: 5px; font-weight: bold;">Price/Day:</td>
+                    <td style="padding: 5px;" th:text="${car.price} + '€'"></td>
+                </tr>
+                <tr>
+                    <td style="padding: 5px; font-weight: bold;">Age:</td>
+                    <td style="padding: 5px;" th:text="${car.carAge()} + ' years'"></td>
+                    <td style="padding: 5px;"></td>
+                    <td style="padding: 5px;"></td>
+                </tr>
+            </table>
+
+            <!-- Car Actions -->
+            <div style="margin-top: 10px;">
+                <a th:href="@{deleteCar(carIdFromView=${car.id})}" style="margin-right: 10px; color: #cc0000;">Delete</a>
+                <a th:href="@{updateCar(carIdFromView=${car.id})}" style="margin-right: 10px; color: #0066cc;">Update</a>
+                <a th:href="@{detailCar(carIdFromView=${car.id})}" style="color: #009900;">Detail</a>
+            </div>
+        </div>
+
+        <!-- Insurance Company Information -->
+        <div style="background-color: #fff2e6; padding: 10px; margin-bottom: 15px; border-radius: 5px;">
+            <h4 style="margin: 0 0 10px 0; color: #cc6600;">🛡️ Insurance Company</h4>
+            <div th:if="${car.inssuranceCia != null}">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold;">Company ID:</td>
+                        <td style="padding: 5px;" th:text="${car.inssuranceCia.id}"></td>
+                        <td style="padding: 5px; font-weight: bold;">Company Name:</td>
+                        <td style="padding: 5px;" th:text="${car.inssuranceCia.name}"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold;">Description:</td>
+                        <td style="padding: 5px;" th:text="${car.inssuranceCia.description}" colspan="3"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; font-weight: bold;">Employees:</td>
+                        <td style="padding: 5px;" th:text="${car.inssuranceCia.qtyEmployee}"></td>
+                        <td style="padding: 5px; font-weight: bold;">Active:</td>
+                        <td style="padding: 5px;">
+                            <span th:if="${car.inssuranceCia.active}" style="color: green;">✅ Yes</span>
+                            <span th:unless="${car.inssuranceCia.active}" style="color: red;">❌ No</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div th:unless="${car.inssuranceCia != null}">
+                <p style="color: #666; font-style: italic;">No insurance company assigned</p>
+            </div>
+        </div>
+
+        <!-- Car Extras Information -->
+        <div style="background-color: #f0fff0; padding: 10px; border-radius: 5px;">
+            <h4 style="margin: 0 0 10px 0; color: #006600;">🔧 Car Extras</h4>
+            <div th:if="${car.carExtras != null and !car.carExtras.isEmpty()}">
+                <table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+                    <thead>
+                    <tr style="background-color: #e6ffe6;">
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Extra ID</th>
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Name</th>
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Description</th>
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Category</th>
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Daily Price</th>
+                        <th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Available</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="extra : ${car.carExtras}">
+                        <td style="padding: 8px; border: 1px solid #ddd;" th:text="${extra.id}"></td>
+                        <td style="padding: 8px; border: 1px solid #ddd;" th:text="${extra.name}"></td>
+                        <td style="padding: 8px; border: 1px solid #ddd;" th:text="${extra.description}"></td>
+                        <td style="padding: 8px; border: 1px solid #ddd;" th:text="${extra.category}"></td>
+                        <td style="padding: 8px; border: 1px solid #ddd;" th:text="${extra.dailyPrice} + '€'"></td>
+                        <td style="padding: 8px; border: 1px solid #ddd;">
+                            <span th:if="${extra.available}" style="color: green;">✅ Available</span>
+                            <span th:unless="${extra.available}" style="color: red;">❌ Not Available</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:unless="${car.carExtras != null and !car.carExtras.isEmpty()}">
+                <p style="color: #666; font-style: italic;">No extras available for this car</p>
+            </div>
+        </div>
+
+    </div>
+
+    <p style="margin-top: 30px;">
+        <a th:href="@{/cars/newCar}" style="background-color: #0066cc; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px;">Add new car</a>
+    </p>
+
+</div>
+
+</body>
+</html>

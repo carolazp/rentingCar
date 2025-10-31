@@ -39,7 +39,7 @@ public class PopulateCar {
     }
 
 
-    // pair Car---CarExtras relationship
+    // pair Car(one)---CarExtras(many) relationship
     public void assignCarToCarExtras(List<Car> cars, List<CarExtras> carExtrass){
         Random random = new Random();
 

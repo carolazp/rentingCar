@@ -46,6 +46,27 @@ public class CarController{
 
     }
 
+
+    @GetMapping("/cars-relation")
+    public String listCarsRelated(Model model){
+        Iterable<Car> carsIterable = carRepository.findAll(); // findAll(from CrudRepository) return an Iterable
+        List<Car> cars = new ArrayList<>();
+        carsIterable.forEach(cars::add); // converting to List for Thymeleaf
+        // as List is more confortable to use it in the View, Lish has method size(), you can manipulate the list, more functionality...
+        // |---> for (Car car : carsIterable){ cars.add(car) };
+
+        model.addAttribute("cars", cars);
+        model.addAttribute("rentalCompany", "Premium Car Rental");
+        model.addAttribute("totalCars", cars.size());
+        model.addAttribute("fleetStatus", "Active Fleet with Relations");
+
+        System.out.println("Cars with relations (controller/car-relation): " + cars);
+
+        return "cars-relation";
+
+    }
+
+
     /* ------------------- MOVE THESE METHODS TO UTILS/PopulateCar.JAVA -------------------
     // generate ramdom plate for Cars
     private String generateRandomPlate(Random random){
